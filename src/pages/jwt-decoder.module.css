@@ -27,7 +27,6 @@
     border: 1px solid #d1d5db; /* border: Tailwind default gray-300 */
     border-radius: 0.25rem; /* rounded */
     box-sizing: border-box; /* Ensures padding doesn't affect width */
-    margin-bottom: 1rem;
 }
 
 .decodeButton {
@@ -69,4 +68,11 @@
     font-size: 1.5rem;  /* text-xl */
     font-weight: 700;    /* font-bold */
     text-align: center;
+}
+
+.error{
+    padding: 0 2rem;
+    * >  p {
+        margin: 0 !important;
+    }
 }

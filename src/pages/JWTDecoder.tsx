@@ -1,9 +1,9 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import styles from './jwt-decoder.module.css'
 
 export default function JWTDecoder() {
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState(defaultToken);
     const [decoded, setDecoded] = useState<JwtPayload>();
     const [error, setError] = useState("");
 
@@ -28,7 +28,9 @@ export default function JWTDecoder() {
             setDecoded(undefined);
         }
     };
-
+    useEffect(() => {
+        handleDecode(token);
+    }, [handleDecode])
     const handlePaste = (e: any) => {
         setToken(e.target.value)
         // const pasted = e.clipboardData.getData("Text");
@@ -49,14 +51,13 @@ export default function JWTDecoder() {
                         onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handlePaste(e)}
                     />
 
-                    <button
-                        className={styles.decodeButton}
-                        onClick={() => handleDecode()}
-                    >
-                        Decode
-                    </button>
+                    {/*<button*/}
+                    {/*    className={styles.decodeButton}*/}
+                    {/*    onClick={() => handleDecode()}*/}
+                    {/*>*/}
+                    {/*    Decode*/}
+                    {/*</button>*/}
 
-                    {error && <p className={styles.textRed500}>{error}</p>}
                 </div>
                 <div>
                     <h3 className={styles.heading}>Decoded Token:</h3>
@@ -68,8 +69,14 @@ export default function JWTDecoder() {
                         </div>
                     )}
                 </div>
+
+            </div>
+            <div className={styles.error}>
+                {error && <p className={styles.textRed500}>{error}</p>}
             </div>
         </div>
 
     );
 }
+
+const defaultToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
