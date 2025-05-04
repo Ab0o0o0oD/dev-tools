@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.jwtDecoderContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.jwtDecoderContainer > div {
+    flex: 1;
+}
+
+.encodedContainer{
+    display: flex;
+    flex-direction: column;
+
+}
+.textareaFull {
+    width: 100%;            /* w-full */
+    height: 100%;
+    padding: 0.5rem;        /* p-2 */
+    border: 1px solid #d1d5db; /* border: Tailwind default gray-300 */
+    border-radius: 0.25rem; /* rounded */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    margin-bottom: 1rem;
+}
+
+.decodeButton {
+    background-color: #3b82f6; /* Tailwind's bg-blue-500 */
+    color: white; /* text-white */
+    /* px-4 */
+    /* py-2 */
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem; /* rounded */
+    transition: background-color 0.2s ease;
+    border: none;
+}
+
+.decodeButton:hover {
+    background-color: #2563eb; /* hover:bg-blue-600 */
+}
+
+.textRed500 {
+    color: #ef4444; /* Tailwind's red-500 */
+}
+
+.decodedContainer {
+    background-color: #f3f4f6;    /* bg-gray-100 */
+    padding: 0.75rem;             /* p-3 */
+    border-radius: 0.25rem;       /* rounded */
+}
+
+
+.preformatted {
+    font-size: 0.875rem; /* text-sm */
+    overflow: auto;      /* overflow-auto */
+    white-space: pre-wrap; /* optional: wraps long lines */
+    word-break: break-word;
+}
+.heading {
+    font-weight: 600; /* font-semibold */
+}
+.title {
+    font-size: 1.5rem;  /* text-xl */
+    font-weight: 700;    /* font-bold */
+    text-align: center;
+}
