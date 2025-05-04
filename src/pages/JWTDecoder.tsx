@@ -6,7 +6,9 @@ export default function JWTDecoder() {
     const [token, setToken] = useState(defaultToken);
     const [decoded, setDecoded] = useState<JwtPayload>();
     const [error, setError] = useState("");
-
+    useEffect(() => {
+        handleDecode(token);
+    }, [token])
     const handleDecode = (inputToken = token) => {
         try {
             const decodedToken = jwtDecode(inputToken) as JwtPayload;
