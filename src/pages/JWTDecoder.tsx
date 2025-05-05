@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {jwtDecode, JwtPayload} from "jwt-decode";
 import styles from './jwt-decoder.module.css'
 
@@ -6,16 +6,12 @@ export default function JWTDecoder() {
     const [token, setToken] = useState(defaultToken);
     const [decoded, setDecoded] = useState<JwtPayload>();
     const [error, setError] = useState("");
-    useEffect(() => {
-        handleDecode(token);
-    }, [token])
-    const handleDecode = (inputToken = token) => {
+    const handleDecode = useCallback((inputToken = token) => {
         try {
             const decodedToken = jwtDecode(inputToken) as JwtPayload;
 
-            // Check expiration if present
             if (decodedToken.exp) {
-                const currentTime = Date.now() / 1000; // seconds
+                const currentTime = Date.now() / 1000;
                 if (decodedToken.exp < currentTime) {
                     setError("⚠️ Token has expired.");
                     setDecoded(decodedToken);
@@ -29,10 +25,12 @@ export default function JWTDecoder() {
             setError("❌ Invalid JWT token");
             setDecoded(undefined);
         }
-    };
+    }, [token]);
+
     useEffect(() => {
         handleDecode(token);
-    }, [handleDecode])
+    }, [token, handleDecode]);
+
     const handlePaste = (e: any) => {
         setToken(e.target.value)
         // const pasted = e.clipboardData.getData("Text");
@@ -45,7 +43,7 @@ export default function JWTDecoder() {
             <div className={styles.jwtDecoderContainer}>
                 <div className={styles.encodedContainer}>
 
-                    <h3 className={styles.heading}>Decoded Token:</h3>
+                    <h3 className={styles.heading}>Encoded jwt:</h3>
                     <textarea
                         className={styles.textareaFull}
                         placeholder="Paste your JWT token here..."
